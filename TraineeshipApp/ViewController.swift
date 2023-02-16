@@ -19,7 +19,7 @@ class ViewController: UIViewController, ViewProtocol {
         return imageView
     }()
     
-    // MARK: Область с контентом
+    // MARK: - Область с контентом
     
     private lazy var contentsView: UIView = {
         let view = UIView()
@@ -68,7 +68,7 @@ class ViewController: UIViewController, ViewProtocol {
         return cv
     }()
     
-    // MARK: Основной UIScrollView
+    // MARK: - Основной UIScrollView
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -78,7 +78,7 @@ class ViewController: UIViewController, ViewProtocol {
         return scrollView
     }()
     
-    // MARK: Нижний фрейм и его элементы
+    // MARK: - Нижний фрейм и элементы
 
     private lazy var subView: UIView = {
         let view = UIView()
@@ -110,7 +110,7 @@ class ViewController: UIViewController, ViewProtocol {
         return label
     }()
 
-    // MARK: viewDidLoad
+    // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,51 +125,53 @@ class ViewController: UIViewController, ViewProtocol {
     }
     
     func setupConstraints() {
-        
-        // MARK: Констрейнты нижнего фрейма и элементов
-        subView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        subView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        subView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -58).isActive = true
-        subView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        wantToJoinLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        wantToJoinLabel.bottomAnchor.constraint(equalTo: subView.bottomAnchor, constant: -20).isActive = true
-        wantToJoinLabel.leadingAnchor.constraint(equalTo: subView.leadingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            // MARK: - Констрейнты нижнего фрейма и элементов
+            subView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            subView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            subView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -58),
+            subView.heightAnchor.constraint(equalToConstant: 60),
+            
+            wantToJoinLabel.heightAnchor.constraint(equalToConstant: 20),
+            wantToJoinLabel.bottomAnchor.constraint(equalTo: subView.bottomAnchor, constant: -20),
+            wantToJoinLabel.leadingAnchor.constraint(equalTo: subView.leadingAnchor),
 
-        sendRequestButton.bottomAnchor.constraint(equalTo: subView.bottomAnchor).isActive = true
-        sendRequestButton.trailingAnchor.constraint(equalTo: subView.trailingAnchor).isActive = true
-        sendRequestButton.widthAnchor.constraint(equalToConstant: 219).isActive = true
-        sendRequestButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            sendRequestButton.bottomAnchor.constraint(equalTo: subView.bottomAnchor),
+            sendRequestButton.trailingAnchor.constraint(equalTo: subView.trailingAnchor),
+            sendRequestButton.widthAnchor.constraint(equalToConstant: 219),
+            sendRequestButton.heightAnchor.constraint(equalToConstant: 60),
 
-        // MARK: Констрейнты основного UIScrollView и элементов
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: subView.topAnchor).isActive = true
-        
-        backgroundImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        backgroundImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        backgroundImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+            // MARK: - Констрейнты основного UIScrollView и элементов
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: subView.topAnchor),
+            
+            backgroundImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            backgroundImageView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
 
-        // MARK: Констрейнты для области контента
-        contentsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        contentsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        contentsView.heightAnchor.constraint(equalToConstant: 216).isActive = true
-        contentsView.bottomAnchor.constraint(equalTo: subView.topAnchor).isActive = true
+            // MARK: - Констрейнты для области контента
+            contentsView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentsView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentsView.heightAnchor.constraint(equalToConstant: 216),
+            contentsView.bottomAnchor.constraint(equalTo: subView.topAnchor),
 
-        traineeShipHeaderLabel.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20).isActive = true
-        traineeShipHeaderLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentsView.trailingAnchor, constant: -20).isActive = true
-        traineeShipHeaderLabel.topAnchor.constraint(equalTo: contentsView.topAnchor, constant: 24).isActive = true
+            traineeShipHeaderLabel.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20),
+            traineeShipHeaderLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentsView.trailingAnchor, constant: -20),
+            traineeShipHeaderLabel.topAnchor.constraint(equalTo: contentsView.topAnchor, constant: 24),
+            
+            traineeShipDescriptionOneLabel.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20),
+            traineeShipDescriptionOneLabel.widthAnchor.constraint(equalTo: contentsView.widthAnchor, constant: -40),
+            traineeShipDescriptionOneLabel.trailingAnchor.constraint(equalTo: contentsView.trailingAnchor, constant: -20),
+            traineeShipDescriptionOneLabel.topAnchor.constraint(equalTo: traineeShipHeaderLabel.bottomAnchor, constant: 12),
+            
+            carouselOneCollectionView.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20),
+            carouselOneCollectionView.trailingAnchor.constraint(equalTo: contentsView.trailingAnchor, constant: -20),
+            carouselOneCollectionView.topAnchor.constraint(equalTo: traineeShipDescriptionOneLabel.bottomAnchor, constant: 12),
+            carouselOneCollectionView.heightAnchor.constraint(equalToConstant: 44)
+        ])
         
-        traineeShipDescriptionOneLabel.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20).isActive = true
-        traineeShipDescriptionOneLabel.widthAnchor.constraint(equalTo: contentsView.widthAnchor, constant: -40).isActive = true
-        traineeShipDescriptionOneLabel.trailingAnchor.constraint(equalTo: contentsView.trailingAnchor, constant: -20).isActive = true
-        traineeShipDescriptionOneLabel.topAnchor.constraint(equalTo: traineeShipHeaderLabel.bottomAnchor, constant: 12).isActive = true
-        
-        carouselOneCollectionView.leadingAnchor.constraint(equalTo: contentsView.leadingAnchor, constant: 20).isActive = true
-        carouselOneCollectionView.trailingAnchor.constraint(equalTo: contentsView.trailingAnchor, constant: -20).isActive = true
-        carouselOneCollectionView.topAnchor.constraint(equalTo: traineeShipDescriptionOneLabel.bottomAnchor, constant: 12).isActive = true
-        carouselOneCollectionView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
 
     @objc func sendRequestButtonTap() {
@@ -178,28 +180,6 @@ class ViewController: UIViewController, ViewProtocol {
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: Resources.Text.alertClose, style: .default))
         self.present(alert, animated: true)
-    }
-}
-
-extension UILabel { // Настройка высоты строки
-    public var lineHeight: CGFloat? {
-        get { nil }
-        set {
-            let lineHeight = newValue ?? font.lineHeight
-            let baselineOffset = (lineHeight - font.lineHeight) / 2.0 / 2.0
-
-            let mutableParagraphStyle = NSMutableParagraphStyle()
-            mutableParagraphStyle.minimumLineHeight = lineHeight
-            mutableParagraphStyle.maximumLineHeight = lineHeight
-
-            attributedText = NSAttributedString(
-                string: text ?? "",
-                attributes: [
-                    .baselineOffset : baselineOffset,
-                    .paragraphStyle : mutableParagraphStyle
-                ]
-            )
-        }
     }
 }
 
